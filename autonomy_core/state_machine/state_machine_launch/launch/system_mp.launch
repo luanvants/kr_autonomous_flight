@@ -20,14 +20,16 @@
     <arg name="real_robot" default="false"/>
 
 	  <!-- estimation related args -->
-	<arg name="cam0" default="cam_left"/>
-    <arg name="cam1" default="cam_right"/>
-    <arg name="imu" default="imu"/>
+	<arg name="cam0" default="/quadrotor/ovc3/left"/>
+    <arg name="cam1" default="/quadrotor/ovc3/right"/>
+    <!-- <arg name="cam0" default="/quadrotor/bonus_left/left"/>
+      <arg name="cam1" default="/quadrotor/bonus_right/right"/> -->
+    <arg name="imu" default="/falcon4/os1_cloud_node/imu"/>
     <arg name="output_odom" default="ukf_odom"/>
 	<arg name="robot_frame_id" default="$(arg robot)"/>
 	<arg name="vio_imu_frame_id" default="$(arg robot)/stereo_rig_imu"/>
-	<arg name="calibration_file" default="msckf_calib.yaml"/>
-	<!-- <arg name="calibration_file" default="$(find estimation_launch)/config/msckf_calib_simulation.yaml"/> -->
+	<!-- <arg name="calibration_file" default="msckf_calib.yaml"/> -->
+	<arg name="calibration_file" default="$(find estimation_launch)/config/msckf_calib_simulation.yaml"/>
 	<!-- This should be set true for simulation -->
 	<arg name="publish_body_camera_tf" default="true"/>
 	<!-- This should be set false for simulation -->
@@ -40,7 +42,7 @@
 		<include file="$(find estimation_launch)/launch/estimation.launch">
 			<!-- Those params are set for unity simulation, they may need to be modified if used for real robot experiments or other simulator -->
 			<arg name="publish_body_camera_tf" value="$(arg publish_body_camera_tf)"/>
-			<arg name="vio_imu_frame_id" value="$(arg vio_imu_frame_id)"/>			
+			<arg name="vio_imu_frame_id" value="$(arg vio_imu_frame_id)"/>
 			<arg name="publish_odom_tf" value="$(arg publish_odom_tf)"/>
 			<arg name="cam0" value="$(arg cam0)"/>
 			<arg name="cam1" value="$(arg cam1)"/>
@@ -48,7 +50,7 @@
 			<arg name="mag" value="$(arg mag)"/>
 			<arg name="output_odom" value="$(arg output_odom)"/>
 			<arg name="robot_frame_id" value="$(arg robot_frame_id)"/>
-			<arg name="calibration_file" value="$(arg calibration_file)"/>		
+			<arg name="calibration_file" value="$(arg calibration_file)"/>
 		</include>
 	</group>
 
@@ -59,7 +61,7 @@
 		     <arg name="gains_file" value="$(arg gains_file)"/>
 	    </include>
 	</group>
-    	
+
     	<group unless="$(arg use_motion_primitive)">
 	    <include file="$(find control_launch)/launch/control.launch">
 		     <arg name="mass" value="$(arg mass)"/>

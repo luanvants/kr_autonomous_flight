@@ -11,7 +11,7 @@ cam0:
     distortion_model: radtan
     distortion_coeffs: [0, 0, 0, 0]
     resolution: [480, 320]
-    rostopic: /quadrotor/cam_left/image_raw
+    rostopic: /quadrotor/ovc3/left/image_raw  #/quadrotor/cam_left/image_raw
 cam1:
     T_cam_imu: [-2.181366198783508e-12, -1.000000000002153, -2.384185790460513e-07, -0.09999866826978376, -1.110223024625157e-16, 2.38416397846386e-07, -1.000000000002153, 3.044861815459932e-08, 1.000000000002181, 0, -2.181366198783508e-12, -0.09999827910891668, 0, 0, 0, 1]
     camera_model: pinhole
@@ -19,5 +19,5 @@ cam1:
     distortion_model: radtan
     distortion_coeffs: [0, 0, 0, 0]
     resolution: [480, 320]
-    rostopic: /quadrotor/cam_right/image_raw
+    rostopic: /quadrotor/ovc3/right/image_raw  #/quadrotor/cam_right/image_raw
     T_cn_cnm1: [1.000000000004362, 2.18097762061901e-12, -2.181254656513452e-12, -0.1999969482432824, 2.181199665382753e-12, 1.000000000004362, 2.18081108724942e-12, 4.813510780613475e-08, -2.180921589500185e-12, 2.181477221090666e-12, 1.000000000004362, 3.874308595469556e-07, 0, 0, 0, 1]

@@ -2,24 +2,24 @@
 <launch>
 
   <!-- robot name -->
-  <arg name="robot" default="quadrotor" />  
+  <arg name="robot" default="quadrotor" />
   <!-- robot base-link name -->
-  <arg name="robot_base_link" default="$(arg robot)/base_link"/> 
+  <arg name="robot_base_link" default="$(arg robot)/base_link"/>
   <!-- lidar's frame name in the tf tree -->
   <arg name="lidar_frame" default="os1_lidar"/>
   <!-- mass of the robot -->
-  <arg name="mass" default="1.83" /> 
+  <arg name="mass" default="1.83" />
   <!-- point cloud topic name -->
   <arg name="lidar_cloud_topic" default="/falcon4/os1_cloud_node/points" />
   <!-- robot odometry topic name -->
-  <arg name="gt_odom" default="ground_truth/odom"/> 
-  <!-- use dispersion based motion planning algorithm (only for internal use) --> 
+  <arg name="gt_odom" default="ground_truth/odom"/>
+  <!-- use dispersion based motion planning algorithm (only for internal use) -->
   <arg name="min_dispersion_planner" default="false" />
   <!-- if use onboard sensing, set it to be true and set odom to be ukf_odom /> -->
-  <arg name="onboard_sensing" default="false"/>
-  
+  <arg name="onboard_sensing" default="true"/>
 
-  <!-- launch the Gazebo simulator --> 
+
+  <!-- launch the Gazebo simulator -->
   <arg name="launch_sim" default="true"/>
   <!-- robot takeoff height /> -->
   <arg name="takeoff_height" default="1.0"/>
@@ -30,17 +30,18 @@
   <arg name="yaw" default="-0.0"/>
   <!-- control gains config file -->
   <arg name="gains_file" default="$(find gazebo_utils)/config/falcon4_os1_so3_gains.yaml"/>
-  <!-- several example world, check out mrsl_quadrotor/mrsl_quadrotor_description/worlds for all examples --> 
-  <!-- example 1: small forest --> 
+  <!-- several example world, check out mrsl_quadrotor/mrsl_quadrotor_description/worlds for all examples -->
+  <!-- example 1: small forest -->
   <arg name="world_model" default="forest0"/>
-  <!-- example 2: large forest --> 
+  <!-- example 2: large forest -->
   <!-- <arg name="world_model" default="forest_Large"/> -->
-  <!-- example 3: simple pillars --> 
+  <!-- example 3: simple pillars -->
   <!-- <arg name="world_model" default="pillars"/> -->
+  <!-- <arg name="world_model" default="small_city"/> -->
 
   <include if="$(arg launch_sim)"
     file="$(find gazebo_utils)/launch/simulation.launch">
-    <arg name="odom" value="$(arg gt_odom)"/>  
+    <arg name="odom" value="$(arg gt_odom)"/>
     <arg name="robot" value="$(arg robot)"/>
     <arg name="world_model" value="$(arg world_model)"/>
     <arg name="x" value="$(arg x)"/>
