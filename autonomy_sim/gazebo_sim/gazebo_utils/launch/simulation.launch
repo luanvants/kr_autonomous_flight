@@ -5,7 +5,7 @@
   <arg name="robot_frame" default="$(arg robot)/base_link"/>
   <arg name="world_model" default="$(optenv FLA_ENV D60)"/>
   <arg name="world_frame" default="map"/>
-  <arg name="odom" default="ground_truth/odom"/>  
+  <arg name="odom" default="ground_truth/odom"/>
   <arg name="x" default="0.5"/>
   <arg name="y" default="0.5"/>
   <arg name="z" default="0"/>
@@ -28,8 +28,25 @@
     </node>
 
     <node pkg="mrsl_quadrotor_utils"
+      type="change_header"
+      name="change_header1"
+      output="screen">
+      <remap from="~odom_in" to="/fast_lio/odom"/>
+      <remap from="~odom_out" to="raw_odom1"/>
+      <param name="robot_frame" value="$(arg robot_frame)"/>
+      <param name="world_frame" value="$(arg world_frame)"/>
+    </node>
+
+    <node pkg="mrsl_quadrotor_utils"
       type="change_odom"
       name="change_odom">
+      <remap from="~odom_in" to="raw_odom1"/>
+      <remap from="~odom_out" to="Truth_odom"/>
+      <param name="dt_thr" value="0.5"/>
+    </node>
+    <node pkg="mrsl_quadrotor_utils"
+      type="change_odom"
+      name="change_odom1">
       <remap from="~odom_in" to="raw_odom"/>
       <remap from="~odom_out" to="odom"/>
       <param name="dt_thr" value="0.5"/>
